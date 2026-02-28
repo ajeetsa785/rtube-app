@@ -6,50 +6,25 @@
     <title>R_TUBE</title>
     <script src="https://sad.adsgram.ai/js/adsgram-ad-sdk.js"></script>
     <style>
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-        }
-        .btn {
-            background-color: #0088cc;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .btn:active {
-            background-color: #006699;
-        }
+        body { background: #000; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .btn { background: #0088cc; color: #fff; padding: 15px 30px; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; }
     </style>
 </head>
 <body>
     <h1>R_TUBE</h1>
-    <p>Watch ads and earn money</p>
-    
     <button class="btn" onclick="showAd()">Watch Ad</button>
 
     <script>
-        // Initializing Adsgram with your specific Block ID: 23937
         const AdController = window.Adsgram.init({ blockId: "23937" });
 
         function showAd() {
+            console.log("Attempting to show ad...");
             AdController.show().then((result) => {
-                // User finished watching the ad
-                alert("Ad watched successfully! You earned a reward.");
+                alert("Success! Reward granted.");
             }).catch((result) => {
-                // Ad failed or was skipped
-                alert("Ad failed to load: " + (result.description || "Unknown error"));
+                // This will tell us the EXACT error
+                alert("Adsgram Error: " + result.description);
+                console.error("Ad Error:", result);
             });
         }
     </script>
