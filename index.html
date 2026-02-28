@@ -5,28 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>R_TUBE</title>
     <script src="https://sad.adsgram.ai/js/adsgram-ad-sdk.js"></script>
-    <style>
-        body { background: #000; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .btn { background: #0088cc; color: #fff; padding: 15px 30px; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; }
-    </style>
 </head>
-<body>
+<body style="background: #000; color: #fff; text-align: center; padding-top: 50px;">
     <h1>R_TUBE</h1>
-    <button class="btn" onclick="showAd()">Watch Ad</button>
+    <button id="adBtn" style="padding: 15px 30px; font-size: 18px;">Watch Ad</button>
 
     <script>
-        const AdController = window.Adsgram.init({ blockId: "23937" });
+        // Your Block ID with debug mode enabled to force a video
+        const AdController = window.Adsgram.init({ blockId: "23937", debug: true });
 
-        function showAd() {
-            console.log("Attempting to show ad...");
-            AdController.show().then((result) => {
-                alert("Success! Reward granted.");
-            }).catch((result) => {
-                // This will tell us the EXACT error
-                alert("Adsgram Error: " + result.description);
-                console.error("Ad Error:", result);
+        document.getElementById('adBtn').onclick = () => {
+            AdController.show().then(() => {
+                alert("Success! Video played.");
+            }).catch((err) => {
+                alert("Error: " + err.description);
             });
-        }
+        };
     </script>
 </body>
 </html>
