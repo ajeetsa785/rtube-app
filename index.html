@@ -16,6 +16,7 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
+            text-align: center;
         }
         .btn {
             background-color: #0088cc;
@@ -25,6 +26,10 @@
             border-radius: 10px;
             font-size: 18px;
             cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn:active {
+            background-color: #006699;
         }
     </style>
 </head>
@@ -35,13 +40,16 @@
     <button class="btn" onclick="showAd()">Watch Ad</button>
 
     <script>
-        const AdController = window.Adsgram.init({ blockId: "YOUR_BLOCK_ID_HERE" });
+        // Initializing Adsgram with your specific Block ID: 23937
+        const AdController = window.Adsgram.init({ blockId: "23937" });
 
         function showAd() {
             AdController.show().then((result) => {
-                alert("Ad watched successfully!");
+                // User finished watching the ad
+                alert("Ad watched successfully! You earned a reward.");
             }).catch((result) => {
-                alert("Ad failed to load: " + result.description);
+                // Ad failed or was skipped
+                alert("Ad failed to load: " + (result.description || "Unknown error"));
             });
         }
     </script>
