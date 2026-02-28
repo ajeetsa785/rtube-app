@@ -1,26 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>R_TUBE</title>
     <script src="https://sad.adsgram.ai/js/adsgram-ad-sdk.js"></script>
 </head>
-<body style="background: #000; color: #fff; text-align: center; padding-top: 50px;">
+<body style="background:#000; color:#fff; text-align:center; padding-top:100px; font-family:sans-serif;">
     <h1>R_TUBE</h1>
-    <button id="adBtn" style="padding: 15px 30px; font-size: 18px;">Watch Ad</button>
+    <p>Click below to earn rewards</p>
+    
+    <button id="adBtn" style="padding:20px 40px; font-size:20px; background:#0088cc; color:#fff; border:none; border-radius:10px; cursor:pointer;">
+        Watch Ad Now
+    </button>
 
     <script>
-        // Your Block ID with debug mode enabled to force a video
+        // Use your specific Block ID: 23937
         const AdController = window.Adsgram.init({ blockId: "23937", debug: true });
 
-        document.getElementById('adBtn').onclick = () => {
+        document.getElementById('adBtn').onclick = function() {
+            this.innerText = "Loading Ad...";
+            this.disabled = true;
+
             AdController.show().then(() => {
-                alert("Success! Video played.");
+                alert("SUCCESS: You earned your reward!");
+                resetButton();
             }).catch((err) => {
-                alert("Error: " + err.description);
+                alert("AD ERROR: " + (err.description || "Try again in 1 minute"));
+                resetButton();
             });
         };
+
+        function resetButton() {
+            const btn = document.getElementById('adBtn');
+            btn.innerText = "Watch Ad Now";
+            btn.disabled = false;
+        }
     </script>
 </body>
 </html>
